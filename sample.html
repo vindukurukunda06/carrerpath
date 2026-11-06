@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f6f3eb">
+	<title>Rapid Response | Staff Emergency Guide</title>
+	<style>
+		:root {
+			color-scheme: light;
+			font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+			color: #192f32;
+			background: #f6f3eb;
+			font-synthesis: none;
+			--ink: #192f32;
+			--muted: #59696a;
+			--paper: #fffefa;
+			--line: #dedfd6;
+			--coral: #e85f4a;
+			--teal: #176f69;
+			--yellow: #f5cb4e;
+		}
+		* { box-sizing: border-box; }
+		body { min-width: 320px; margin: 0; background-color: #f6f3eb; background-image: repeating-linear-gradient(135deg, transparent 0 28px, #e9e5d91c 28px 29px); }
+		button, input, textarea, select { font: inherit; }
+		button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #177d79; outline-offset: 3px; }
+		.page { width: min(100% - 48px, 1160px); margin: 0 auto; padding: 26px 0 56px; }
+		.topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid #cfd3ca; }
+		.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+		.brand-mark { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 9px; color: white; background: var(--teal); font-size: 1.15rem; }
+		.top-note { color: var(--muted); font-size: 0.8rem; text-align: right; }
+		.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr); gap: 32px; align-items: end; margin: 22px 0 20px; padding: 34px 38px; overflow: hidden; border-radius: 8px; background: #f3cb52; }
+		.hero::after { position: absolute; top: -38px; right: 12%; width: 150px; height: 200px; border: 1px solid #192f3222; border-radius: 50%; content: ""; transform: rotate(38deg); pointer-events: none; }
+		.eyebrow { margin: 0 0 10px; color: #405751; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+		h1 { max-width: 620px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 3.25rem; font-weight: 400; line-height: 1.02; }
+		.hero-copy { position: relative; z-index: 1; margin: 0 0 2px; padding-left: 18px; border-left: 2px solid #192f3260; color: #364d49; font-size: 0.92rem; line-height: 1.55; }
+		.safety-note { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 26px; padding: 14px 16px; border: 1px solid #ecc8ba; border-radius: 6px; background: #fff2eb; color: #6b3830; font-size: 0.85rem; line-height: 1.5; }
+		.safety-note strong { color: #572b25; }
+		.note-mark { flex: 0 0 auto; display: grid; width: 22px; height: 22px; place-items: center; border-radius: 50%; background: #e9a18b; color: #572b25; font-weight: 800; }
+		.practice-panel { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 20px; align-items: center; margin: 0 0 28px; padding: 18px 20px; border: 1px solid #c9d9cf; border-radius: 6px; background: #e7f0e8; }
+		.practice-panel h2 { margin: 0 0 6px; font-size: 1.08rem; }
+		.practice-copy { margin: 0; color: #4b6258; font-size: 0.77rem; line-height: 1.5; }
+		.practice-form { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) auto; gap: 9px; align-items: end; }
+		.practice-field { display: grid; gap: 5px; }
+		.practice-field label { color: #384d4e; font-size: 0.7rem; font-weight: 800; }
+		.practice-field input, .practice-field select { width: 100%; min-height: 38px; padding: 8px; border: 1px solid #bfcec3; border-radius: 4px; background: #fffefa; color: var(--ink); font-size: 0.76rem; }
+		.practice-button { min-height: 38px; padding: 8px 11px; border: 0; border-radius: 4px; background: #176f69; color: white; font-size: 0.74rem; font-weight: 800; cursor: pointer; }
+		.practice-button:hover { background: #105a55; }
+		.practice-result { margin-top: 9px; }
+		.practice-result[hidden] { display: none; }
+		.practice-result-card { padding: 10px 12px; border-left: 4px solid #176f69; border-radius: 3px; background: #fffefa; }
+		.practice-result-card.red { border-color: #d84e3e; }
+		.practice-result-card.trauma { border-color: #bc6e19; }
+		.practice-result-title { margin: 0 0 3px; color: var(--ink); font-size: 0.77rem; font-weight: 800; }
+		.practice-result-message { margin: 0; color: #536462; font-size: 0.72rem; line-height: 1.45; }
+		.content-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(250px, 0.75fr); gap: 30px; align-items: start; }
+		.section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 12px; }
+		h2 { margin: 0; font-size: 1.22rem; letter-spacing: 0; }
+		.result-count { color: var(--muted); font-size: 0.76rem; }
+		.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 15px; }
+		.filters { display: flex; flex-wrap: wrap; gap: 7px; }
+		.filter { min-height: 36px; padding: 7px 12px; border: 1px solid #cbd1c9; border-radius: 4px; background: transparent; color: #415455; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+		.filter[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: white; }
+		.search-wrap { position: relative; flex: 1 1 190px; min-width: 150px; }
+		.search-wrap::before { position: absolute; top: 50%; left: 12px; color: #667575; content: "⌕"; font-size: 1.2rem; transform: translateY(-55%); }
+		.search { width: 100%; min-height: 36px; padding: 8px 10px 8px 34px; border: 1px solid #cbd1c9; border-radius: 4px; background: var(--paper); color: var(--ink); font-size: 0.8rem; }
+		.alert-list { display: grid; gap: 10px; }
+		.alert-card { overflow: hidden; border: 1px solid var(--line); border-left: 5px solid var(--alert); border-radius: 6px; background: var(--paper); }
+		.alert-card[hidden] { display: none; }
+		.alert-card.blue { --alert: #287c88; --tint: #e5f3f1; }
+		.alert-card.red { --alert: #d84e3e; --tint: #fff0e9; }
+		.alert-card.trauma { --alert: #bc6e19; --tint: #fff4d8; }
+		.alert-card summary { display: grid; grid-template-columns: 42px minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 74px; padding: 12px 16px; list-style: none; cursor: pointer; }
+		.alert-card summary::-webkit-details-marker { display: none; }
+		.alert-card summary::after { color: var(--muted); content: "+"; font-size: 1.35rem; font-weight: 400; }
+		.alert-card[open] summary::after { content: "−"; }
+		.alert-symbol { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 5px; background: var(--tint); color: var(--alert); font-size: 0.75rem; font-weight: 900; }
+		.alert-title { display: block; margin-bottom: 4px; color: var(--ink); font-size: 0.98rem; font-weight: 800; }
+		.alert-subtitle { display: block; color: var(--muted); font-size: 0.78rem; line-height: 1.4; }
+		.alert-tag { align-self: start; margin-top: 4px; padding: 5px 7px; border-radius: 3px; background: var(--tint); color: var(--alert); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; }
+		.alert-body { padding: 0 18px 17px 70px; color: #46595a; font-size: 0.82rem; line-height: 1.55; }
+		.alert-body p { margin: 0 0 9px; }
+		.alert-body ul { margin: 0; padding-left: 18px; }
+		.alert-body li + li { margin-top: 5px; }
+		.side-panel { padding: 20px; border-radius: 6px; background: #dff0e9; }
+		.side-panel h2 { margin-bottom: 4px; }
+		.side-intro { margin: 0 0 16px; color: #526866; font-size: 0.78rem; line-height: 1.5; }
+		.response-step { display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid #bfd8cd; }
+		.step-number { display: grid; width: 26px; height: 26px; place-items: center; border-radius: 50%; background: #176f69; color: white; font-size: 0.72rem; font-weight: 800; }
+		.response-step p { margin: 1px 0 0; color: #344f4c; font-size: 0.8rem; line-height: 1.48; }
+		.side-panel strong { color: #193f3a; }
+		.footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 28px; padding-top: 14px; border-top: 1px solid #cfd3ca; color: #657271; font-size: 0.72rem; line-height: 1.5; }
+		.empty-state { display: none; padding: 24px; border: 1px dashed #bfc9c3; border-radius: 6px; color: var(--muted); background: #fffefa; font-size: 0.85rem; text-align: center; }
+		.empty-state.visible { display: block; }
+		.handoff-section { margin-top: 42px; padding-top: 28px; border-top: 1px solid #cfd3ca; }
+		.handoff-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr); gap: 28px; align-items: center; margin-bottom: 20px; }
+		.handoff-heading h2 { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; font-weight: 400; }
+		.handoff-heading p:last-child { max-width: 470px; margin: 0; color: var(--muted); font-size: 0.84rem; line-height: 1.55; }
+		.handoff-photo { position: relative; height: 190px; margin: 0; overflow: hidden; border-radius: 6px; background: #b7d9d3; }
+		.handoff-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+		.handoff-photo figcaption { position: absolute; inset: auto 0 0; padding: 34px 14px 12px; color: white; background: linear-gradient(transparent, #152e30c9); font-size: 0.75rem; font-weight: 700; }
+		.privacy-note { margin: 0 0 16px; padding: 12px 14px; border-left: 4px solid #ce8b24; background: #fff1d2; color: #5e471e; font-size: 0.78rem; line-height: 1.5; }
+		.handoff-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+		.handoff-form { padding: 20px; border: 1px solid #d9ddd4; border-radius: 6px; background: var(--paper); }
+		.form-title { margin: 0 0 15px; font-size: 1rem; }
+		.form-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+		.field { display: grid; gap: 5px; min-width: 0; }
+		.field.full { grid-column: 1 / -1; }
+		.field label { color: #384d4e; font-size: 0.74rem; font-weight: 800; }
+		.field input, .field textarea, .field select { width: 100%; min-height: 39px; padding: 9px 10px; border: 1px solid #cbd1c9; border-radius: 4px; background: #fff; color: var(--ink); font-size: 0.8rem; }
+		.field textarea { min-height: 70px; resize: vertical; line-height: 1.45; }
+		.field input::placeholder, .field textarea::placeholder { color: #83908d; }
+		.form-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 15px; }
+		.form-help { margin: 0; color: var(--muted); font-size: 0.69rem; line-height: 1.45; }
+		.submit-handoff { flex: 0 0 auto; min-height: 40px; padding: 9px 14px; border: 0; border-radius: 4px; background: var(--teal); color: white; font-size: 0.78rem; font-weight: 800; cursor: pointer; }
+		.submit-handoff:hover { background: #105a55; }
+		.handoff-board-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+		.handoff-board-head h3 { margin: 0; font-size: 1rem; }
+		.handoff-status-message { min-height: 1em; margin: 0 0 10px; color: #176f69; font-size: 0.75rem; }
+		.handoff-list { display: grid; gap: 10px; }
+		.handoff-empty { padding: 20px; border: 1px dashed #bcc9c3; border-radius: 5px; color: var(--muted); font-size: 0.8rem; line-height: 1.5; text-align: center; }
+		.handoff-card { padding: 14px; border: 1px solid #d9ddd4; border-radius: 5px; background: #fffefa; }
+		.handoff-card-head { display: flex; justify-content: space-between; align-items: start; gap: 10px; padding-bottom: 9px; border-bottom: 1px solid #e3e5dc; }
+		.handoff-card h4 { margin: 0 0 3px; font-size: 0.9rem; }
+		.handoff-meta { margin: 0; color: var(--muted); font-size: 0.69rem; line-height: 1.45; }
+		.priority { flex: 0 0 auto; padding: 5px 7px; border-radius: 3px; background: #e8f1ec; color: #27604c; font-size: 0.64rem; font-weight: 800; }
+		.priority.watch { background: #fff1d2; color: #79551a; }
+		.priority.urgent { background: #ffe4df; color: #a53d30; }
+		.handoff-points { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px; padding: 11px 0; }
+		.handoff-point strong { display: block; margin-bottom: 3px; color: #536462; font-size: 0.65rem; text-transform: uppercase; }
+		.handoff-point p { margin: 0; color: #34494a; font-size: 0.74rem; line-height: 1.45; overflow-wrap: anywhere; }
+		.handoff-card-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+		.review-status { color: #996019; font-size: 0.69rem; font-weight: 700; }
+		.review-status.complete { color: #176f69; }
+		.review-button { min-height: 32px; padding: 6px 9px; border: 1px solid #aebfb7; border-radius: 4px; background: transparent; color: #245c53; font-size: 0.68rem; font-weight: 800; cursor: pointer; }
+		.review-button:disabled { border-color: #b9d1c4; background: #e6f2eb; color: #176f69; cursor: default; }
+		@media (max-width: 760px) {
+			.page { width: min(100% - 32px, 600px); padding-top: 18px; }
+			.hero { grid-template-columns: 1fr; gap: 16px; padding: 27px 24px; }
+			h1 { font-size: 2.65rem; }
+			.hero-copy { max-width: 480px; }
+			.content-grid { grid-template-columns: 1fr; gap: 22px; }
+			.side-panel { order: 2; }
+			.practice-panel { grid-template-columns: 1fr; }
+			.practice-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+			.practice-button { grid-column: 1 / -1; }
+			.handoff-heading { grid-template-columns: 1fr; gap: 14px; }
+			.handoff-photo { height: 210px; }
+			.handoff-grid { grid-template-columns: 1fr; }
+		}
+		@media (max-width: 460px) {
+			.page { width: min(100% - 24px, 420px); }
+			.top-note { max-width: 145px; font-size: 0.7rem; }
+			.hero { padding: 24px 19px; }
+			h1 { font-size: 2.25rem; }
+			.section-head { align-items: start; flex-direction: column; gap: 5px; }
+			.controls { align-items: stretch; }
+			.filters { width: 100%; }
+			.filter { flex: 1 1 auto; padding-inline: 8px; }
+			.search-wrap { flex-basis: 100%; }
+			.alert-card summary { grid-template-columns: 36px minmax(0, 1fr) 12px; gap: 9px; padding: 11px; }
+			.alert-symbol { width: 36px; height: 36px; }
+			.alert-tag { display: none; }
+			.alert-body { padding: 0 14px 16px 56px; }
+			.footer { flex-direction: column; gap: 6px; }
+			.handoff-heading h2 { font-size: 1.7rem; }
+			.practice-panel { padding: 15px; }
+			.practice-form { grid-template-columns: 1fr; }
+			.practice-button { grid-column: auto; }
+			.handoff-photo { height: 170px; }
+			.handoff-form { padding: 15px; }
+			.form-fields { grid-template-columns: 1fr; }
+			.field.full { grid-column: auto; }
+			.form-actions { align-items: stretch; flex-direction: column; }
+			.submit-handoff { width: 100%; }
+			.handoff-points { grid-template-columns: 1fr; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<header class="topbar">
+			<div class="brand"><span class="brand-mark" aria-hidden="true">+</span>Rapid Response</div>
+			<div class="top-note">Staff emergency reference<br>Keep local policy close</div>
+		</header>
+		<section class="hero" aria-labelledby="page-title">
+			<div>
+				<p class="eyebrow">Hospital team guide · quick reference</p>
+				<h1 id="page-title">When every second matters.</h1>
+			</div>
+			<p class="hero-copy">Recognize the alert, call through your facility's approved system, and follow your assigned role.</p>
+		</section>
+		<aside class="safety-note" aria-label="Important protocol notice">
+			<span class="note-mark" aria-hidden="true">!</span>
+			<div><strong>Use your hospital's current protocol.</strong> This quick guide is a reminder only. Local code definitions, activation criteria, phone numbers, roles, and procedures take precedence.</div>
+		</aside>
+		<section class="practice-panel" aria-labelledby="practice-heading">
+			<div>
+				<p class="eyebrow">Training mode · local preview</p>
+				<h2 id="practice-heading">Practice alert activation</h2>
+				<p class="practice-copy">Preview a staff alert format for Code Blue, Code Red, or Trauma. This demo does not contact staff or connect to a hospital system.</p>
+			</div>
+			<div>
+				<form class="practice-form" id="practice-alert-form">
+					<div class="practice-field"><label for="practice-type">Alert type</label><select id="practice-type" required><option value="" selected disabled>Choose alert</option><option value="blue">Code Blue</option><option value="red">Code Red</option><option value="trauma">Trauma Alert</option></select></div>
+					<div class="practice-field"><label for="practice-location">Practice location</label><input id="practice-location" placeholder="e.g. North · 204" required></div>
+					<button class="practice-button" type="submit">Preview alert</button>
+				</form>
+				<div class="practice-result" id="practice-result" role="status" aria-live="polite" hidden></div>
+			</div>
+		</section>
+		<div class="content-grid">
+			<section aria-labelledby="alerts-heading">
+				<div class="section-head">
+					<h2 id="alerts-heading">Emergency alerts</h2>
+					<span class="result-count" id="result-count" aria-live="polite">3 alerts</span>
+				</div>
+				<div class="controls">
+					<nav class="filters" aria-label="Filter emergency alerts">
+						<button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+						<button class="filter" type="button" data-filter="blue" aria-pressed="false">Code Blue</button>
+						<button class="filter" type="button" data-filter="red" aria-pressed="false">Code Red</button>
+						<button class="filter" type="button" data-filter="trauma" aria-pressed="false">Trauma</button>
+					</nav>
+					<label class="search-wrap"><input class="search" id="alert-search" type="search" aria-label="Search emergency alerts" placeholder="Search alerts" autocomplete="off"></label>
+				</div>
+				<div class="alert-list" id="alert-list">
+					<details class="alert-card blue" data-type="blue">
+						<summary><span class="alert-symbol" aria-hidden="true">BLS</span><span><span class="alert-title">Code Blue</span><span class="alert-subtitle">Cardiac or respiratory emergency · respond within your training</span></span><span class="alert-tag">Medical</span></summary>
+						<div class="alert-body"><p><strong>At a glance:</strong> A person may be unresponsive, not breathing normally, or in cardiac arrest. Activate the response immediately under local policy.</p><ul><li>Call the facility's emergency number and state the exact location; ask someone to bring the AED or emergency equipment.</li><li>Begin CPR or other immediate care only within your current training and assigned role; follow dispatcher or response-team direction.</li><li>Keep the area clear, direct responders in, and share known information when the team arrives.</li></ul></div>
+					</details>
+					<details class="alert-card red" data-type="red">
+						<summary><span class="alert-symbol" aria-hidden="true">FIRE</span><span><span class="alert-title">Code Red</span><span class="alert-subtitle">Fire or smoke · protect people and follow the site fire plan</span></span><span class="alert-tag">Fire / smoke</span></summary>
+						<div class="alert-body"><p><strong>At a glance:</strong> Report the exact location and whether you see fire or smoke. Follow your facility's fire response and evacuation plan.</p><ul><li>Activate the alarm and call the facility's emergency number as directed by local policy.</li><li>Move people from immediate danger; close doors if safe and keep routes clear.</li><li>Use an extinguisher only if trained, the fire is small, and you have a clear exit. Evacuate if unsafe.</li></ul></div>
+					</details>
+					<details class="alert-card trauma" data-type="trauma">
+						<summary><span class="alert-symbol" aria-hidden="true">TRAUMA</span><span><span class="alert-title">Trauma Alert</span><span class="alert-subtitle">Serious injury · activate using approved criteria and pathway</span></span><span class="alert-tag">Injury</span></summary>
+						<div class="alert-body"><p><strong>At a glance:</strong> Use the hospital's trauma activation criteria and notify the response team with the available information.</p><ul><li>Share location, mechanism of injury, estimated arrival or event time, and known patient details when available.</li><li>Ensure access to the patient and keep the route clear for responders.</li><li>Provide immediate care only within your training and role; avoid moving the person unless there is immediate danger.</li></ul></div>
+					</details>
+				</div>
+			<p class="empty-state" id="empty-state">No matching alerts. Try another search or choose “All”.</p>
+			</section>
+			<aside class="side-panel" aria-labelledby="first-response-heading">
+				<h2 id="first-response-heading">First response</h2>
+				<p class="side-intro">A calm, consistent start while the response team is on the way.</p>
+				<div class="response-step"><span class="step-number">1</span><p><strong>Check safety.</strong> Look for immediate hazards before approaching.</p></div>
+				<div class="response-step"><span class="step-number">2</span><p><strong>Call and locate.</strong> Use the facility's emergency system; give the exact unit, room, or landmark.</p></div>
+				<div class="response-step"><span class="step-number">3</span><p><strong>State the alert.</strong> Say what is happening and what help or equipment is needed.</p></div>
+				<div class="response-step"><span class="step-number">4</span><p><strong>Take your role.</strong> Follow your training, team lead, and current local procedure.</p></div>
+			</aside>
+		</div>
+		<section class="handoff-section" aria-labelledby="handoff-heading">
+			<div class="handoff-heading">
+				<div>
+					<p class="eyebrow">Nurse + doctor shift exchange</p>
+					<h2 id="handoff-heading">Make the next shift clear.</h2>
+					<p>Pass the essentials in a consistent SBAR format: situation, background, assessment, and recommendation. Include what needs follow-up and confirm the read-back.</p>
+				</div>
+				<figure class="handoff-photo">
+					<img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85" alt="Clinician in a white coat using a phone, with a stethoscope visible" loading="lazy">
+					<figcaption>One team. One clear handoff.</figcaption>
+				</figure>
+			</div>
+			<p class="privacy-note"><strong>Demo privacy notice:</strong> Handoffs stay only in this page's memory and disappear when it reloads. Do not enter real patient identifiers or protected health information. Use an approved clinical system for actual patient care.</p>
+			<div class="handoff-grid">
+				<form class="handoff-form" id="handoff-form">
+					<h3 class="form-title">Create shift handoff</h3>
+					<div class="form-fields">
+						<div class="field"><label for="patient-ref">Patient / bed reference</label><input id="patient-ref" name="patientRef" placeholder="e.g. Bed 12 (demo only)" required></div>
+						<div class="field"><label for="unit-room">Unit / room</label><input id="unit-room" name="unitRoom" placeholder="e.g. North · 204" required></div>
+						<div class="field"><label for="outgoing">Outgoing clinician / role</label><input id="outgoing" name="outgoing" placeholder="e.g. Day RN" required></div>
+						<div class="field"><label for="incoming">Incoming clinician / role</label><input id="incoming" name="incoming" placeholder="e.g. Night RN" required></div>
+						<div class="field"><label for="priority">Priority</label><select id="priority" name="priority"><option value="routine">Routine</option><option value="watch">Watch closely</option><option value="urgent">Urgent follow-up</option></select></div>
+						<div class="field"><label for="handoff-time">Shift handoff time</label><input id="handoff-time" name="handoffTime" type="time" required></div>
+						<div class="field full"><label for="situation">S · Situation</label><textarea id="situation" name="situation" placeholder="What is happening now? Include the immediate concern." required></textarea></div>
+						<div class="field full"><label for="background">B · Background</label><textarea id="background" name="background" placeholder="Relevant context, recent changes, or events for this shift." required></textarea></div>
+						<div class="field full"><label for="assessment">A · Assessment</label><textarea id="assessment" name="assessment" placeholder="Current status and notable observations within your role." required></textarea></div>
+						<div class="field full"><label for="recommendation">R · Recommendation / tasks</label><textarea id="recommendation" name="recommendation" placeholder="Pending tasks, timing, escalation plan, and what needs confirmation." required></textarea></div>
+					</div>
+					<div class="form-actions">
+						<p class="form-help">Use concise, factual language and follow your facility's documentation policy.</p>
+						<button class="submit-handoff" type="submit">Add handoff</button>
+					</div>
+				</form>
+				<section aria-labelledby="handoff-board-heading">
+					<div class="handoff-board-head"><h3 id="handoff-board-heading">Shift handoff board</h3><span class="result-count" id="handoff-count">0 updates</span></div>
+					<p class="handoff-status-message" id="handoff-message" aria-live="polite"></p>
+					<div class="handoff-list" id="handoff-list" aria-live="polite"><div class="handoff-empty" id="handoff-empty">No handoffs in this session. Create one to start the shift exchange.</div></div>
+				</section>
+			</div>
+		</section>
+		<footer class="footer">
+			<span>For trained hospital staff. Follow current facility policy and emergency plans.</span>
+			<span>Customize alert definitions and activation details with your clinical leadership.</span>
+		</footer>
+	</main>
+	<script>
+		const filters = document.querySelectorAll(".filter");
+		const search = document.querySelector("#alert-search");
+		const cards = [...document.querySelectorAll(".alert-card")];
+		const count = document.querySelector("#result-count");
+		const emptyState = document.querySelector("#empty-state");
+		let activeFilter = "all";
+
+		function updateAlerts() {
+			const query = search.value.trim().toLowerCase();
+			let visibleCount = 0;
+			cards.forEach((card) => {
+				const matchesFilter = activeFilter === "all" || card.dataset.type === activeFilter;
+				const matchesSearch = card.textContent.toLowerCase().includes(query);
+				card.hidden = !(matchesFilter && matchesSearch);
+				if (!card.hidden) visibleCount += 1;
+			});
+			count.textContent = `${visibleCount} ${visibleCount === 1 ? "alert" : "alerts"}`;
+			emptyState.classList.toggle("visible", visibleCount === 0);
+		}
+
+		filters.forEach((button) => {
+			button.addEventListener("click", () => {
+				activeFilter = button.dataset.filter;
+				filters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
+				updateAlerts();
+			});
+		});
+		search.addEventListener("input", updateAlerts);
+
+		const practiceForm = document.querySelector("#practice-alert-form");
+		const practiceResult = document.querySelector("#practice-result");
+		practiceForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const alertType = practiceForm.querySelector("#practice-type");
+			const location = practiceForm.querySelector("#practice-location").value.trim();
+			const preview = document.createElement("div");
+			preview.className = `practice-result-card ${alertType.value}`;
+			const title = document.createElement("p");
+			title.className = "practice-result-title";
+			title.textContent = `${alertType.selectedOptions[0].textContent} · PRACTICE PREVIEW`;
+			const message = document.createElement("p");
+			message.className = "practice-result-message";
+			message.textContent = `Location: ${location}. Preview only; no alert was sent and no hospital system was contacted.`;
+			preview.append(title, message);
+			practiceResult.replaceChildren(preview);
+			practiceResult.hidden = false;
+		});
+
+		const handoffForm = document.querySelector("#handoff-form");
+		const handoffList = document.querySelector("#handoff-list");
+		const handoffCount = document.querySelector("#handoff-count");
+		const handoffMessage = document.querySelector("#handoff-message");
+		const handoffEmpty = document.querySelector("#handoff-empty");
+		const handoffFields = [
+			["Situation", "situation"],
+			["Background", "background"],
+			["Assessment", "assessment"],
+			["Recommendation / tasks", "recommendation"]
+		];
+
+		handoffForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const formData = new FormData(handoffForm);
+			const value = (name) => String(formData.get(name) || "").trim();
+			const card = document.createElement("article");
+			card.className = "handoff-card";
+
+			const cardHead = document.createElement("div");
+			cardHead.className = "handoff-card-head";
+			const headingGroup = document.createElement("div");
+			const heading = document.createElement("h4");
+			heading.textContent = value("patientRef");
+			const meta = document.createElement("p");
+			meta.className = "handoff-meta";
+			meta.textContent = `${value("unitRoom")} · ${value("handoffTime")} · ${value("outgoing")} → ${value("incoming")}`;
+			headingGroup.append(heading, meta);
+			const priority = document.createElement("span");
+			priority.className = `priority ${value("priority") === "routine" ? "" : value("priority")}`;
+			priority.textContent = handoffForm.querySelector("#priority").selectedOptions[0].textContent;
+			cardHead.append(headingGroup, priority);
+
+			const points = document.createElement("div");
+			points.className = "handoff-points";
+			handoffFields.forEach(([label, name]) => {
+				const point = document.createElement("div");
+				point.className = "handoff-point";
+				const pointLabel = document.createElement("strong");
+				pointLabel.textContent = label;
+				const pointText = document.createElement("p");
+				pointText.textContent = value(name);
+				point.append(pointLabel, pointText);
+				points.append(point);
+			});
+
+			const cardFoot = document.createElement("div");
+			cardFoot.className = "handoff-card-foot";
+			const reviewStatus = document.createElement("span");
+			reviewStatus.className = "review-status";
+			reviewStatus.textContent = "Awaiting read-back";
+			const reviewButton = document.createElement("button");
+			reviewButton.className = "review-button";
+			reviewButton.type = "button";
+			reviewButton.textContent = "Mark read-back complete";
+			reviewButton.addEventListener("click", () => {
+				reviewStatus.textContent = "Read-back complete";
+				reviewStatus.classList.add("complete");
+				reviewButton.disabled = true;
+				handoffMessage.textContent = `Read-back confirmed for ${value("patientRef")}.`;
+			});
+			cardFoot.append(reviewStatus, reviewButton);
+			card.append(cardHead, points, cardFoot);
+			handoffList.prepend(card);
+			handoffEmpty.hidden = true;
+			const total = handoffList.querySelectorAll(".handoff-card").length;
+			handoffCount.textContent = `${total} ${total === 1 ? "update" : "updates"}`;
+			handoffMessage.textContent = `Handoff added for ${value("patientRef")}. Confirm read-back with the incoming clinician.`;
+			handoffForm.reset();
+		});
+	</script>
+</body>
+</html>
