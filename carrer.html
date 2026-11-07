@@ -40,7 +40,8 @@
 		.nav-glyph { display: grid; width: 23px; height: 23px; place-items: center; border-radius: 6px; background: #ffffff15; color: var(--lime); font-size: 0.64rem; font-weight: 900; }
 		.sidebar-note { margin-top: auto; padding: 13px 10px 0; border-top: 1px solid #ffffff27; color: #b4c5b9; font-size: 0.67rem; line-height: 1.55; }
 		.sidebar-note strong { display: block; margin-bottom: 4px; color: #ecf1e7; font-size: 0.71rem; }
-		.main { width: min(100%, 1380px); min-width: 0; margin-inline: auto; padding: 25px clamp(18px, 3.6vw, 52px) 25px; counter-reset: workflow-step; }
+		.main { display: grid; align-content: start; gap: 20px; width: min(100%, 1380px); min-width: 0; margin-inline: auto; padding: 25px clamp(18px, 3.6vw, 52px) 25px; counter-reset: workflow-step; }
+		#overview { display: grid; gap: 13px; }
 		.topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 0; }
 		.breadcrumb { margin: 0; color: var(--muted); font-size: 0.72rem; }
 		.local-status { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid #d4dfcb; border-radius: 4px; background: #faffef; color: #48604a; font-size: 0.66rem; font-weight: 750; }
@@ -183,7 +184,8 @@
 			.app { grid-template-columns: 205px minmax(0, 1fr); }
 			.work-grid, .job-grid, .exam-layout, .resume-grid, .aptitude-layout, .quiz-layout { grid-template-columns: 1fr; }
 			.goal-form { grid-template-columns: minmax(0, 1fr) minmax(105px, 0.55fr) auto; }
-			.overview-stats { gap: 7px; }
+			.overview-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+			.overview-stats .stat:first-child { grid-column: 1 / -1; }
 		}
 		@media (max-width: 760px) {
 			.app { grid-template-columns: minmax(0, 1fr); }
