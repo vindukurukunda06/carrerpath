@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f6fbf7">
+	<title>Doodle Days | Cartoon School Supplies</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: light;
+			font-family: "DM Sans", sans-serif;
+			font-synthesis: none;
+			color: #193b36;
+			background: #f6fbf7;
+			--ink: #193b36;
+			--muted: #647a73;
+			--paper: #fffefa;
+			--line: #dde9e1;
+			--green: #187b66;
+			--mint: #d7f1e7;
+			--coral: #ff765e;
+			--yellow: #ffd657;
+			--blue: #a7dafa;
+			--lilac: #d4c6ff;
+			--display: "Fredoka", "Trebuchet MS", sans-serif;
+		}
+		* { box-sizing: border-box; }
+		body { min-width: 320px; margin: 0; background-color: #f6fbf7; background-image: radial-gradient(#bddbd0 0.7px, transparent 0.7px); background-size: 19px 19px; }
+		button, input { font: inherit; }
+		button, a { -webkit-tap-highlight-color: transparent; }
+		button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #ff765e; outline-offset: 3px; }
+		a { color: inherit; }
+		.promo { padding: 8px 16px; background: var(--ink); color: #fff; font-size: 0.75rem; font-weight: 700; text-align: center; }
+		.promo span { color: var(--yellow); }
+		.site-header { position: sticky; z-index: 5; top: 0; border-bottom: 1px solid #e3ebe5; background: #fffefaed; backdrop-filter: blur(12px); }
+		.header-inner { display: flex; align-items: center; gap: 28px; width: min(100% - 40px, 1260px); min-height: 74px; margin: auto; }
+		.brand { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; text-decoration: none; }
+		.brand-mark { display: grid; width: 40px; aspect-ratio: 1; place-items: center; border: 2px solid var(--ink); border-radius: 13px 13px 13px 5px; background: var(--yellow); font-size: 1.35rem; transform: rotate(-5deg); }
+		.brand-name { display: block; color: var(--ink); font-family: var(--display); font-size: 1.3rem; font-weight: 600; line-height: 1; }
+		.brand-tagline { display: block; margin-top: 4px; color: var(--muted); font-size: 0.59rem; font-weight: 700; letter-spacing: 0.02em; }
+		.main-nav { display: flex; align-items: center; gap: 22px; margin-left: auto; }
+		.main-nav a { color: #4a665d; font-size: 0.79rem; font-weight: 700; text-decoration: none; }
+		.main-nav a:hover { color: var(--green); }
+		.header-actions { display: flex; align-items: center; gap: 9px; }
+		.search-wrap { position: relative; }
+		.search-wrap input { width: 180px; height: 39px; padding: 0 12px 0 36px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); font-size: 0.75rem; }
+		.search-icon { position: absolute; top: 50%; left: 12px; color: #70867e; font-size: 1.08rem; transform: translateY(-53%); }
+		.cart-button { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 13px; border: 0; border-radius: 4px; background: var(--ink); color: #fff; font-size: 0.75rem; font-weight: 800; cursor: pointer; }
+		.cart-button:hover { background: var(--green); }
+		.cart-count { display: grid; min-width: 20px; height: 20px; place-items: center; border-radius: 50%; background: var(--yellow); color: var(--ink); font-size: 0.65rem; }
+		main { width: min(100% - 40px, 1260px); margin: 0 auto; }
+		.hero { position: relative; left: 50%; isolation: isolate; display: flex; align-items: center; width: 100vw; min-height: 430px; margin: 24px 0 22px -50vw; padding: 38px max(24px, calc((100vw - 1260px) / 2 + 28px)); overflow: hidden; background: linear-gradient(112deg, #ffe074 0%, #ffc1a8 36%, #bdebf4 69%, #bcebd2 100%); }
+		.hero::before { position: absolute; z-index: 0; inset: 0; background-image: radial-gradient(#ffffff73 1px, transparent 1.5px); background-size: 19px 19px; content: ""; opacity: 0.7; pointer-events: none; }
+		.hero-copy { position: relative; z-index: 2; width: min(48%, 520px); }
+		.hero-kicker { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 12px; padding: 6px 10px; border-radius: 3px; background: #fffefa; color: #386555; font-size: 0.7rem; font-weight: 800; }
+		h1 { max-width: 470px; margin: 0; color: #153f37; font-family: var(--display); font-size: 3.7rem; font-weight: 600; line-height: 0.98; }
+		h1 em { color: #f36851; font-style: normal; }
+		.hero-copy > p { max-width: 390px; margin: 14px 0 19px; color: #506d62; font-size: 0.88rem; line-height: 1.65; }
+		.primary-link { display: inline-flex; align-items: center; gap: 12px; min-height: 45px; padding: 0 16px; border-radius: 4px; background: var(--coral); color: #fff; font-size: 0.79rem; font-weight: 800; text-decoration: none; box-shadow: 0 4px 0 #d45744; transition: transform 150ms ease, box-shadow 150ms ease; }
+		.primary-link:hover { box-shadow: 0 2px 0 #d45744; transform: translateY(2px); }
+		.hero-note { display: inline-block; margin-left: 12px; color: #527166; font-size: 0.68rem; font-weight: 700; }
+		.mascot-stage { position: absolute; z-index: 1; inset: 0; overflow: hidden; }
+		.mascot-stage canvas { display: block; width: 100%; height: 100%; }
+		.hero-fallback { position: absolute; right: 10%; bottom: 18px; display: flex; align-items: end; gap: 18px; font-size: 5rem; filter: drop-shadow(0 10px 4px #31584e30); }
+		.hero-fallback span:nth-child(2) { font-size: 6rem; }
+		.mascot-stage.has-three .hero-fallback { display: none; }
+		.mascot-stage.has-three .hero-fallback { display: none; }
+		.scene-toggle { position: absolute; z-index: 3; right: max(22px, calc((100vw - 1260px) / 2 + 26px)); bottom: 17px; min-height: 35px; padding: 0 10px; border: 1px solid #31584e35; border-radius: 3px; background: #fffefa; color: #31584e; font-size: 0.64rem; font-weight: 800; cursor: pointer; }
+		.scene-toggle:hover { background: #fff; }
+		.perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 28px; }
+		.perk { display: flex; align-items: center; gap: 10px; min-height: 57px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 4px; background: #fffefa; }
+		.perk-icon { display: grid; flex: 0 0 34px; width: 34px; aspect-ratio: 1; place-items: center; border-radius: 50%; background: #ffe8ae; font-size: 1.05rem; }
+		.perk:nth-child(2) .perk-icon { background: #d9eaff; }
+		.perk:nth-child(3) .perk-icon { background: #ffdcd5; }
+		.perk strong { display: block; color: #31564b; font-size: 0.72rem; }
+		.perk small { display: block; margin-top: 3px; color: var(--muted); font-size: 0.62rem; }
+		.shop-section { padding: 14px 0 52px; scroll-margin-top: 88px; }
+		.section-head { display: flex; justify-content: space-between; align-items: end; gap: 18px; margin-bottom: 15px; }
+		.section-kicker { margin: 0 0 5px; color: #e56751; font-size: 0.65rem; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; }
+		h2 { margin: 0; color: var(--ink); font-family: var(--display); font-size: 1.8rem; font-weight: 600; line-height: 1.1; }
+		.section-description { margin: 5px 0 0; color: var(--muted); font-size: 0.75rem; }
+		.category-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0 17px; }
+		.category-button { min-height: 33px; padding: 0 12px; border: 1px solid #d6e4dc; border-radius: 3px; background: #fffefa; color: #526e64; font-size: 0.69rem; font-weight: 800; cursor: pointer; }
+		.category-button:hover, .category-button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: white; }
+		.product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+		.product-card { min-width: 0; overflow: hidden; border: 1px solid #dce8df; border-radius: 5px; background: var(--paper); transform-style: preserve-3d; transition: transform 200ms ease, box-shadow 200ms ease; }
+		.product-card:hover { box-shadow: 0 15px 25px #23594b20; transform: perspective(900px) rotateX(3deg) rotateY(-2deg) translateY(-4px); }
+		.product-image { position: relative; display: grid; height: 198px; place-items: center; overflow: hidden; background: var(--product-bg, linear-gradient(135deg, #d5f3dd, #b5e3ef)); perspective: 700px; }
+		.product-illustration { display: grid; width: 100%; height: 100%; place-items: center; transform-style: preserve-3d; }
+		.product-image::before { position: absolute; inset: 12px; border: 1px dashed #ffffffb3; border-radius: 48% 42% 45% 38%; content: ""; transform: rotate(-8deg); }
+		.product-image::before { position: absolute; inset: 12px; border: 1px dashed #ffffffb3; border-radius: 48% 42% 45% 38%; content: ""; transform: rotate(-8deg); }
+		.item-emoji { display: grid; width: 124px; height: 124px; place-items: center; border: 3px solid #fffefa; border-radius: 38% 45% 36% 44%; background: #fffefa66; font-size: 5rem; filter: drop-shadow(0 14px 7px #183f3b35); transform: rotate(-8deg) translateZ(34px); transition: transform 200ms ease; }
+		.product-card:hover .item-emoji { transform: rotate(5deg) translateZ(55px) scale(1.08); }
+		.character-tag { position: absolute; z-index: 1; top: 12px; right: 14px; display: grid; width: 54px; height: 54px; place-items: center; border: 3px solid #fffefa; border-radius: 50%; background: var(--tag-color, #ffdb66); font-size: 2rem; box-shadow: 0 4px 10px #183f3b20; transform: translateZ(45px) rotate(8deg); }
+		.product-label { position: absolute; z-index: 1; left: 10px; bottom: 10px; padding: 6px 8px; border-radius: 3px; background: #fffefa; color: #31584e; font-size: 0.58rem; font-weight: 900; }
+		.mascot-name { position: absolute; right: 10px; bottom: 12px; color: #31584e; font-size: 0.6rem; font-weight: 900; }
+		.product-info { padding: 13px 14px 14px; }
+		.product-category { margin: 0 0 4px; color: #72877d; font-size: 0.59rem; font-weight: 800; text-transform: uppercase; }
+		.product-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+		.product-title { margin: 0; color: #23483e; font-family: var(--display); font-size: 1.04rem; font-weight: 500; line-height: 1.18; }
+		.product-rating { flex: 0 0 auto; color: #b77910; font-size: 0.61rem; font-weight: 800; white-space: nowrap; }
+		.product-description { min-height: 2.8em; margin: 7px 0 12px; color: #718078; font-size: 0.66rem; line-height: 1.45; }
+		.product-bottom { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+		.product-price { color: #193e36; font-family: var(--display); font-size: 1.18rem; font-weight: 600; }
+		.add-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 35px; padding: 0 10px; border: 0; border-radius: 3px; background: #187b66; color: #fff; font-size: 0.66rem; font-weight: 800; cursor: pointer; }
+		.add-button:hover { background: #115c4c; }
+		.add-button:active { transform: translateY(1px); }
+		.no-results { grid-column: 1 / -1; padding: 38px 16px; border: 1px dashed #bbd2c5; border-radius: 4px; color: var(--muted); font-size: 0.82rem; text-align: center; }
+		.gift-banner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; margin: 0 0 46px; padding: 22px 24px; border-radius: 5px; background: #ffe49a; }
+		.gift-banner h2 { font-size: 1.45rem; }
+		.gift-banner p { margin: 5px 0 0; color: #6f5c2c; font-size: 0.72rem; line-height: 1.5; }
+		.gift-banner a { display: inline-flex; min-height: 39px; align-items: center; padding: 0 13px; border-radius: 3px; background: var(--ink); color: #fff; font-size: 0.7rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+		.site-footer { padding: 20px 0 26px; border-top: 1px solid #dbe7df; color: #6b8077; font-size: 0.65rem; }
+		.footer-inner { display: flex; justify-content: space-between; gap: 16px; width: min(100% - 40px, 1260px); margin: auto; }
+		.cart-dialog { width: min(440px, calc(100% - 24px)); max-width: none; max-height: min(80vh, 680px); margin: auto 0 auto auto; padding: 0; border: 0; border-radius: 7px 0 0 7px; background: var(--paper); color: var(--ink); box-shadow: -15px 0 45px #143b3025; }
+		.cart-dialog::backdrop { background: #173a32a6; }
+		.cart-content { display: flex; min-height: 100%; flex-direction: column; padding: 20px; }
+		.cart-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+		.cart-head h2 { font-size: 1.5rem; }
+		.close-button { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid var(--line); border-radius: 3px; background: #fff; color: var(--ink); font-size: 1.1rem; cursor: pointer; }
+		.cart-items { display: grid; gap: 10px; padding: 15px 0; }
+		.cart-empty { padding: 26px 8px; color: var(--muted); font-size: 0.78rem; line-height: 1.5; text-align: center; }
+		.cart-row { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid #e8eee9; }
+		.cart-character { display: grid; width: 58px; height: 58px; place-items: center; border-radius: 3px; font-size: 2rem; }
+		.cart-row strong { display: block; color: #31564b; font-size: 0.72rem; }
+		.cart-row small { display: block; margin-top: 3px; color: var(--muted); font-size: 0.65rem; }
+		.quantity-control { display: flex; align-items: center; gap: 6px; margin-top: 7px; }
+		.quantity-control button { display: grid; width: 23px; height: 23px; place-items: center; border: 1px solid #cddcd2; border-radius: 3px; background: white; color: #285447; cursor: pointer; }
+		.quantity-control span { min-width: 14px; color: var(--ink); font-size: 0.67rem; text-align: center; }
+		.remove-button { padding: 4px; border: 0; background: transparent; color: #b04f40; font-size: 0.61rem; font-weight: 700; cursor: pointer; }
+		.cart-summary { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
+		.cart-total { display: flex; justify-content: space-between; margin-bottom: 12px; color: #35584e; font-size: 0.85rem; font-weight: 800; }
+		.checkout-button { width: 100%; min-height: 43px; border: 0; border-radius: 3px; background: var(--coral); color: #fff; font-size: 0.75rem; font-weight: 900; cursor: pointer; }
+		.cart-note { margin: 9px 0 0; color: var(--muted); font-size: 0.6rem; line-height: 1.45; text-align: center; }
+		.toast { position: fixed; z-index: 10; right: 20px; bottom: 20px; max-width: min(350px, calc(100vw - 40px)); padding: 12px 15px; border-radius: 4px; background: var(--ink); color: white; font-size: 0.74rem; font-weight: 700; box-shadow: 0 5px 22px #173a3233; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity 160ms ease, transform 160ms ease; }
+		.toast.visible { opacity: 1; transform: translateY(0); }
+		@media (max-width: 900px) {
+			.header-inner { gap: 15px; }
+			.main-nav { gap: 12px; }
+			.search-wrap input { width: 150px; }
+			.product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		}
+		@media (max-width: 680px) {
+			.header-inner { flex-wrap: wrap; width: min(100% - 28px, 1260px); gap: 9px; padding: 10px 0; }
+			.brand { margin-right: auto; }
+			.main-nav { order: 3; width: 100%; justify-content: space-between; gap: 12px; overflow-x: auto; padding: 5px 0 2px; }
+			.main-nav a { flex: 0 0 auto; font-size: 0.68rem; }
+			.header-actions { gap: 6px; }
+			.search-wrap input { width: min(35vw, 165px); }
+			.cart-button { gap: 5px; padding: 0 9px; font-size: 0.68rem; }
+			main { width: min(100% - 28px, 1260px); }
+			.hero { align-items: flex-start; min-height: 545px; margin-top: 15px; padding: 25px 20px; }
+			.hero-copy { width: min(100%, 470px); }
+			h1 { max-width: 520px; font-size: 3rem; }
+			.hero-copy > p { margin: 10px 0 14px; font-size: 0.8rem; }
+			.hero-note { margin-left: 7px; font-size: 0.61rem; }
+			.hero-fallback { right: 8%; bottom: 55px; gap: 4px; font-size: 3.5rem; }
+			.hero-fallback span:nth-child(2) { font-size: 4rem; }
+			.scene-toggle { right: 14px; bottom: 12px; }
+			.perks { grid-template-columns: 1fr; gap: 7px; margin-bottom: 22px; }
+			.perk { min-height: 48px; }
+			.perk-icon { flex-basis: 30px; width: 30px; }
+			.product-image { height: 170px; }
+			.gift-banner { grid-template-columns: 1fr; padding: 18px; }
+			.gift-banner a { width: fit-content; }
+			.footer-inner { flex-direction: column; width: min(100% - 28px, 1260px); }
+		}
+		@media (max-width: 430px) {
+			.product-grid { grid-template-columns: 1fr; gap: 11px; }
+			.product-image { height: 210px; }
+			.section-head { align-items: flex-start; flex-direction: column; gap: 4px; }
+			.category-list { gap: 6px; }
+			.category-button { padding: 0 9px; font-size: 0.64rem; }
+			.hero { min-height: 570px; padding: 20px 17px; }
+			h1 { font-size: 2.55rem; }
+			.primary-link { min-height: 41px; padding: 0 12px; font-size: 0.71rem; }
+			.hero-note { display: block; margin: 11px 0 0; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="promo">A little extra magic for <span>back-to-school</span> days · Free shipping over $35</div>
+	<header class="site-header">
+		<div class="header-inner">
+			<a class="brand" href="#home" aria-label="Doodle Days home">
+				<span class="brand-mark" aria-hidden="true">✎</span>
+				<span><span class="brand-name">Doodle Days</span><span class="brand-tagline">Small things. Big school energy.</span></span>
+			</a>
+			<nav class="main-nav" aria-label="Main navigation"><a href="#shop">Shop all</a><a href="#shop" data-nav-category="Bags">Bags</a><a href="#shop" data-nav-category="Writing">Writing</a><a href="#shop" data-nav-category="Lunch">Lunch gear</a></nav>
+			<div class="header-actions">
+				<label class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Find a favorite" aria-label="Search school supplies"></label>
+				<button class="cart-button" id="open-cart" type="button" aria-haspopup="dialog"><span aria-hidden="true">🛍</span><span>Bag</span><span class="cart-count" id="cart-count">0</span></button>
+			</div>
+		</div>
+	</header>
+	<main id="home">
+		<section class="hero" aria-labelledby="hero-title">
+			<div class="hero-copy">
+				<p class="hero-kicker"><span aria-hidden="true">✦</span> School supplies with personality</p>
+				<h1 id="hero-title">Make school days <em>more fun.</em></h1>
+				<p>Meet the colorful crew of backpacks, notebooks, and lunch gear ready to join your next big adventure.</p>
+				<a class="primary-link" href="#shop">Pick your school favorites <span aria-hidden="true">→</span></a><span class="hero-note">Made for little big ideas</span>
+			</div>
+			<div class="mascot-stage" id="mascot-stage" aria-label="A playful animated 3D display of school supplies and original cartoon friends">
+				<canvas id="mascot-canvas" aria-hidden="true"></canvas>
+				<div class="hero-fallback" aria-hidden="true"><span>🎒</span><span>🦊</span><span>📓</span><span>🐸</span></div>
+			</div>
+			<button class="scene-toggle" id="scene-toggle" type="button" aria-pressed="false">Ⅱ Pause 3D show</button>
+		</section>
+		<section class="perks" aria-label="Shopping highlights">
+			<div class="perk"><span class="perk-icon" aria-hidden="true">🎨</span><span><strong>Character-packed picks</strong><small>Colorful designs for every kind of kid</small></span></div>
+			<div class="perk"><span class="perk-icon" aria-hidden="true">📦</span><span><strong>Free shipping over $35</strong><small>A little treat for the whole school list</small></span></div>
+			<div class="perk"><span class="perk-icon" aria-hidden="true">🌱</span><span><strong>Made for everyday use</strong><small>Useful supplies, ready for big ideas</small></span></div>
+		</section>
+		<section class="shop-section" id="shop" aria-labelledby="shop-title">
+			<div class="section-head"><div><p class="section-kicker">The school-day crew</p><h2 id="shop-title">Find your new sidekick</h2><p class="section-description">Bright, useful favorites for class, lunch, and everywhere in between.</p></div><span class="section-description" id="result-count" aria-live="polite">6 school-day favorites</span></div>
+			<div class="category-list" role="group" aria-label="Filter by category">
+				<button class="category-button" type="button" data-category="All" aria-pressed="true">Everything</button>
+				<button class="category-button" type="button" data-category="Bags" aria-pressed="false">Bags</button>
+				<button class="category-button" type="button" data-category="Writing" aria-pressed="false">Writing &amp; art</button>
+				<button class="category-button" type="button" data-category="Lunch" aria-pressed="false">Lunch gear</button>
+				<button class="category-button" type="button" data-category="Extras" aria-pressed="false">Little extras</button>
+			</div>
+			<div class="product-grid" id="product-grid" aria-live="polite"></div>
+		</section>
+		<section class="gift-banner" aria-label="School bundle">
+			<div><h2>One list, one happy bundle.</h2><p>Pick a backpack, writing buddy, and lunch favorite for a cheerful start to the school year.</p></div>
+			<a href="#shop" id="bundle-link">Build a school-day set <span aria-hidden="true"> →</span></a>
+		</section>
+	</main>
+	<footer class="site-footer"><div class="footer-inner"><span>© 2026 Doodle Days · Supplies for curious minds.</span><span>Prices shown in USD. Grown-up help is welcome at checkout.</span></div></footer>
+	<dialog class="cart-dialog" id="cart-dialog" aria-labelledby="cart-title"><div class="cart-content"><div class="cart-head"><h2 id="cart-title">Your happy bag</h2><button class="close-button" id="close-cart" type="button" aria-label="Close shopping bag">×</button></div><div class="cart-items" id="cart-items"></div><div class="cart-summary"><div class="cart-total"><span>Subtotal</span><span id="cart-total">$0.00</span></div><button class="checkout-button" id="checkout-button" type="button">Continue to checkout</button><p class="cart-note">This demo shop doesn't process payments. Ask a grown-up before making a real purchase.</p></div></div></dialog>
+	<div class="toast" id="toast" role="status" aria-live="polite"></div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+	<script>
+		const products = [
+			{ id: "fox-pack", name: "Fox & Friends Backpack", category: "Bags", price: 28, character: "🦊", characterName: "Pico the Fox", itemEmoji: "🎒", tint: "#ffad68", backdrop: "linear-gradient(135deg, #ffdb76, #ff9a85 72%, #ffb7bd)", label: "BIG ADVENTURES", description: "Room for notebooks, snacks, and important discoveries." },
+			{ id: "pencil-pals", name: "Pencil Pals Kit", category: "Writing", price: 9, character: "🐻", characterName: "Momo the Bear", itemEmoji: "✏️", tint: "#c9b5ff", backdrop: "linear-gradient(135deg, #c8b7ff, #f8b8d3 72%, #ffd495)", label: "DRAW & DOODLE", description: "A cheerful set for sketches, notes, and new ideas." },
+			{ id: "rainbow-book", name: "Rainbow Day Notebook", category: "Writing", price: 7, character: "🐱", characterName: "Nova the Star Cat", itemEmoji: "📓", tint: "#85d5f3", backdrop: "linear-gradient(135deg, #8edcf0, #9bb9ff 72%, #d2b7ff)", label: "BIG IDEAS INSIDE", description: "A bright place for class notes and brilliant plans." },
+			{ id: "lunch-buddy", name: "Lunch Buddy Box", category: "Lunch", price: 14, character: "🐸", characterName: "Bibi the Frog", itemEmoji: "🍱", tint: "#87d8a4", backdrop: "linear-gradient(135deg, #b4eb94, #61d5b5 72%, #b1e6f4)", label: "SNACK TIME", description: "Keeps lunch together for the middle-of-the-day break." },
+			{ id: "sip-bottle", name: "Sunny Side Bottle", category: "Lunch", price: 12, character: "🐼", characterName: "Pip the Panda", itemEmoji: "🧃", tint: "#ffd65e", backdrop: "linear-gradient(135deg, #ffe676, #ffb47b 72%, #ff8f88)", label: "SIP & GO", description: "A reusable bottle for classroom and playground breaks." },
+			{ id: "sticker-club", name: "Tiny Explorer Stickers", category: "Extras", price: 5, character: "🐙", characterName: "Ollie the Octopus", itemEmoji: "⭐", tint: "#ffaaa2", backdrop: "linear-gradient(135deg, #ffa7ac, #ffca83 72%, #ffe376)", label: "EXTRA SPARKLE", description: "Little character stickers to decorate folders and planners." }
+		];
+		const cart = new Map();
+		let activeCategory = "All";
+		const productGrid = document.querySelector("#product-grid");
+		const searchInput = document.querySelector("#search-input");
+		const cartDialog = document.querySelector("#cart-dialog");
+		const money = (amount) => `$${amount.toFixed(2)}`;
+		function initializeMascots() {
+			if (!window.THREE) return;
+			const stage = document.querySelector("#mascot-stage");
+			try {
+				const scene = new THREE.Scene();
+				const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 80);
+				camera.position.z = 9;
+				const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector("#mascot-canvas"), alpha: true, antialias: true, preserveDrawingBuffer: true });
+				renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+				renderer.setClearColor(0x000000, 0);
+				scene.add(new THREE.HemisphereLight(0xffffff, 0x668779, 1.1));
+				const keyLight = new THREE.DirectionalLight(0xffffff, 1.4);
+				keyLight.position.set(-3, 5, 8);
+				scene.add(keyLight);
+				const fillLight = new THREE.DirectionalLight(0xff9f83, 0.7);
+				fillLight.position.set(5, 1, 4);
+				scene.add(fillLight);
+				const mat = (color) => new THREE.MeshStandardMaterial({ color, roughness: 0.52 });
+				const part = (parent, geometry, color, x, y, z, scale) => {
+					const mesh = new THREE.Mesh(geometry, mat(color));
+					mesh.position.set(x, y, z);
+					if (scale) mesh.scale.set(...scale);
+					parent.add(mesh);
+					return mesh;
+				};
+				const backpack = new THREE.Group();
+				part(backpack, new THREE.BoxGeometry(1.05, 1.34, 0.48), 0xff765e, 0, 0, 0);
+				part(backpack, new THREE.BoxGeometry(0.82, 0.52, 0.12), 0xffbc53, 0, -0.37, 0.3);
+				part(backpack, new THREE.SphereGeometry(0.105, 18, 14), 0xffffff, -0.19, 0.17, 0.27);
+				part(backpack, new THREE.SphereGeometry(0.105, 18, 14), 0xffffff, 0.19, 0.17, 0.27);
+				part(backpack, new THREE.SphereGeometry(0.05, 14, 12), 0x183b36, -0.17, 0.16, 0.36);
+				part(backpack, new THREE.SphereGeometry(0.05, 14, 12), 0x183b36, 0.21, 0.16, 0.36);
+				part(backpack, new THREE.SphereGeometry(0.11, 16, 12), 0xffdfcf, 0, -0.05, 0.35, [1.25, 0.72, 0.48]);
+				part(backpack, new THREE.SphereGeometry(0.045, 12, 10), 0xf36851, 0, 0.01, 0.4);
+				const notebook = new THREE.Group();
+				part(notebook, new THREE.BoxGeometry(0.96, 1.28, 0.16), 0xfff8de, 0.04, 0, 0);
+				part(notebook, new THREE.BoxGeometry(0.98, 1.3, 0.11), 0x657ce8, -0.02, 0, 0.12).rotation.z = -0.08;
+				part(notebook, new THREE.SphereGeometry(0.2, 20, 16), 0xffd657, 0, 0.25, 0.2, [1, 1, 0.25]);
+				part(notebook, new THREE.SphereGeometry(0.045, 12, 10), 0x183b36, -0.07, 0.28, 0.27);
+				part(notebook, new THREE.SphereGeometry(0.045, 12, 10), 0x183b36, 0.07, 0.28, 0.27);
+				const bottle = new THREE.Group();
+				part(bottle, new THREE.CylinderGeometry(0.32, 0.36, 1.25, 28), 0x42c7b1, 0, -0.03, 0);
+				part(bottle, new THREE.CylinderGeometry(0.22, 0.22, 0.24, 24), 0xffd657, 0, 0.72, 0);
+				part(bottle, new THREE.CylinderGeometry(0.14, 0.18, 0.18, 20), 0xff8469, 0, 0.91, 0);
+				part(bottle, new THREE.SphereGeometry(0.09, 14, 12), 0xffffff, -0.12, 0.05, 0.31);
+				part(bottle, new THREE.SphereGeometry(0.09, 14, 12), 0xffffff, 0.12, 0.05, 0.31);
+				part(bottle, new THREE.SphereGeometry(0.04, 12, 10), 0x183b36, -0.1, 0.05, 0.38);
+				part(bottle, new THREE.SphereGeometry(0.04, 12, 10), 0x183b36, 0.14, 0.05, 0.38);
+				const fox = new THREE.Group();
+				part(fox, new THREE.SphereGeometry(0.62, 24, 20), 0xff8a55, 0, 0, 0);
+				const leftEar = part(fox, new THREE.ConeGeometry(0.24, 0.7, 18), 0xff8a55, -0.4, 0.55, 0);
+				leftEar.rotation.z = 0.32;
+				const rightEar = part(fox, new THREE.ConeGeometry(0.24, 0.7, 18), 0xff8a55, 0.4, 0.55, 0);
+				rightEar.rotation.z = -0.32;
+				part(fox, new THREE.SphereGeometry(0.11, 16, 12), 0xffffff, -0.2, 0.08, 0.52);
+				part(fox, new THREE.SphereGeometry(0.11, 16, 12), 0xffffff, 0.2, 0.08, 0.52);
+				part(fox, new THREE.SphereGeometry(0.05, 14, 10), 0x183b36, -0.17, 0.08, 0.62);
+				part(fox, new THREE.SphereGeometry(0.05, 14, 10), 0x183b36, 0.23, 0.08, 0.62);
+				part(fox, new THREE.SphereGeometry(0.21, 18, 14), 0xffe6ce, 0, -0.2, 0.52, [1.35, 0.8, 0.55]);
+				part(fox, new THREE.SphereGeometry(0.06, 14, 10), 0x71443a, 0, -0.13, 0.66);
+				const pencilCup = new THREE.Group();
+				part(pencilCup, new THREE.CylinderGeometry(0.48, 0.42, 0.72, 28, 1, true), 0xffc857, 0, -0.1, 0);
+				[[0xff6d71, -0.2, 0.13], [0x54c5bb, 0, -0.08], [0x7787ed, 0.2, -0.18]].forEach(([color, x, rotation]) => {
+					const pencil = new THREE.Group();
+					part(pencil, new THREE.CylinderGeometry(0.07, 0.07, 1.05, 12), color, 0, 0, 0);
+					const tip = part(pencil, new THREE.ConeGeometry(0.07, 0.2, 12), 0xf3d3a6, 0, 0.61, 0);
+					tip.rotation.z = Math.PI;
+					pencil.position.set(x, 0.2, 0.1);
+					pencil.rotation.z = rotation;
+					pencilCup.add(pencil);
+				});
+				const models = [backpack, notebook, bottle, pencilCup, fox];
+				models.forEach((model) => scene.add(model));
+				let paused = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				const toggle = document.querySelector("#scene-toggle");
+				function placeModels() {
+					const compact = stage.clientWidth < 680;
+					const positions = compact ? [[-1.25, -1.15], [-0.62, -1.3], [0.05, -1.23], [0.69, -1.25], [1.3, -1.1]] : [[0.95, 0.05], [2.35, -0.15], [3.75, -0.1], [5.15, -0.17], [6.5, 0.12]];
+					camera.aspect = stage.clientWidth / stage.clientHeight;
+					camera.updateProjectionMatrix();
+					models.forEach((model, index) => {
+						model.position.set(positions[index][0], positions[index][1], index % 2 ? -0.2 : 0);
+						model.userData.baseY = positions[index][1];
+						model.scale.setScalar(compact ? 0.7 : index === 4 ? 1.04 : 1.05);
+					});
+					renderer.setSize(stage.clientWidth, stage.clientHeight, false);
+					renderer.render(scene, camera);
+				}
+				placeModels();
+				stage.classList.add("has-three");
+				toggle.setAttribute("aria-pressed", String(paused));
+				toggle.textContent = paused ? "▶ Play 3D show" : "Ⅱ Pause 3D show";
+				const clock = new THREE.Clock();
+				function animate() {
+					requestAnimationFrame(animate);
+					const elapsed = clock.getElapsedTime();
+					if (!paused) models.forEach((model, index) => {
+						model.rotation.y = Math.sin(elapsed * 0.8 + index) * 0.22;
+						model.rotation.z = Math.sin(elapsed * 0.7 + index * 1.6) * 0.07;
+						model.position.y = model.userData.baseY + Math.sin(elapsed * 1.5 + index) * 0.08;
+					});
+					renderer.render(scene, camera);
+				}
+				animate();
+				window.addEventListener("resize", placeModels);
+				toggle.addEventListener("click", () => {
+					paused = !paused;
+					toggle.setAttribute("aria-pressed", String(paused));
+					toggle.textContent = paused ? "▶ Play 3D show" : "Ⅱ Pause 3D show";
+				});
+			} catch {
+				stage.classList.remove("has-three");
+			}
+		}
+		function make(tag, className, text) {
+			const element = document.createElement(tag);
+			if (className) element.className = className;
+			if (text !== undefined) element.textContent = text;
+			return element;
+		}
+		function renderProducts() {
+			const query = searchInput.value.trim().toLowerCase();
+			const visible = products.filter((product) => (activeCategory === "All" || product.category === activeCategory) && `${product.name} ${product.category} ${product.description}`.toLowerCase().includes(query));
+			productGrid.replaceChildren();
+			document.querySelector("#result-count").textContent = `${visible.length} ${visible.length === 1 ? "school-day favorite" : "school-day favorites"}`;
+			if (!visible.length) {
+				productGrid.append(make("p", "no-results", "No school-day sidekicks found. Try another search or category."));
+				return;
+			}
+			visible.forEach((product) => {
+				const card = make("article", "product-card");
+				const imageWrap = make("div", "product-image");
+				const character = make("span", "character-tag", product.character);
+				character.style.setProperty("--tag-color", product.tint);
+				character.setAttribute("aria-hidden", "true");
+				imageWrap.style.setProperty("--product-bg", product.backdrop);
+				const illustration = make("div", "product-illustration");
+				illustration.append(make("span", "item-emoji", product.itemEmoji));
+				imageWrap.append(illustration, character, make("span", "product-label", product.label), make("span", "mascot-name", product.characterName));
+				const info = make("div", "product-info");
+				info.append(make("p", "product-category", product.category));
+				const titleRow = make("div", "product-title-row");
+				titleRow.append(make("h3", "product-title", product.name), make("span", "product-rating", "★ 4.9"));
+				info.append(titleRow, make("p", "product-description", product.description));
+				const bottom = make("div", "product-bottom");
+				bottom.append(make("span", "product-price", money(product.price)));
+				const addButton = make("button", "add-button", "＋ Add to bag");
+				addButton.type = "button";
+				addButton.setAttribute("aria-label", `Add ${product.name} to bag for ${money(product.price)}`);
+				addButton.addEventListener("click", () => addToCart(product.id));
+				bottom.append(addButton);
+				info.append(bottom);
+				card.append(imageWrap, info);
+				productGrid.append(card);
+			});
+		}
+		function addToCart(productId) {
+			cart.set(productId, (cart.get(productId) || 0) + 1);
+			renderCart();
+			showToast(`${products.find((item) => item.id === productId).name} added to your bag!`);
+		}
+		function updateQuantity(productId, change) {
+			const next = (cart.get(productId) || 0) + change;
+			if (next <= 0) cart.delete(productId);
+			else cart.set(productId, next);
+			renderCart();
+		}
+		function renderCart() {
+			const cartItems = document.querySelector("#cart-items");
+			cartItems.replaceChildren();
+			let itemCount = 0;
+			let subtotal = 0;
+			if (!cart.size) cartItems.append(make("p", "cart-empty", "Your bag is ready for its first school-day sidekick."));
+			for (const [productId, quantity] of cart) {
+				const product = products.find((item) => item.id === productId);
+				itemCount += quantity;
+				subtotal += product.price * quantity;
+				const row = make("div", "cart-row");
+				const image = make("span", "cart-character", product.character);
+				image.style.background = product.tint;
+				const detail = make("div");
+				detail.append(make("strong", "", product.name), make("small", "", money(product.price)));
+				const quantityControl = make("div", "quantity-control");
+				for (const [label, change, text] of [["Decrease quantity", -1, "−"], ["Increase quantity", 1, "+"]]) {
+					const button = make("button", "", text);
+					button.type = "button";
+					button.setAttribute("aria-label", `${label} of ${product.name}`);
+					button.addEventListener("click", () => updateQuantity(productId, change));
+					quantityControl.append(button);
+					if (change === -1) quantityControl.append(make("span", "", String(quantity)));
+				}
+				detail.append(quantityControl);
+				const remove = make("button", "remove-button", "Remove");
+				remove.type = "button";
+				remove.addEventListener("click", () => { cart.delete(productId); renderCart(); });
+				row.append(image, detail, remove);
+				cartItems.append(row);
+			}
+			document.querySelector("#cart-count").textContent = String(itemCount);
+			document.querySelector("#cart-total").textContent = money(subtotal);
+			document.querySelector("#checkout-button").disabled = itemCount === 0;
+			document.querySelector("#checkout-button").style.opacity = itemCount === 0 ? "0.55" : "1";
+		}
+		let toastTimer;
+		function showToast(message) {
+			const toast = document.querySelector("#toast");
+			toast.textContent = message;
+			toast.classList.add("visible");
+			clearTimeout(toastTimer);
+			toastTimer = setTimeout(() => toast.classList.remove("visible"), 2200);
+		}
+		document.querySelectorAll(".category-button").forEach((button) => button.addEventListener("click", () => {
+			activeCategory = button.dataset.category;
+			document.querySelectorAll(".category-button").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+			renderProducts();
+		}));
+		searchInput.addEventListener("input", renderProducts);
+		document.querySelectorAll("[data-nav-category]").forEach((link) => link.addEventListener("click", () => {
+			activeCategory = link.dataset.navCategory;
+			document.querySelectorAll(".category-button").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.category === activeCategory)));
+			renderProducts();
+		}));
+		document.querySelector("#open-cart").addEventListener("click", () => cartDialog.showModal());
+		document.querySelector("#close-cart").addEventListener("click", () => cartDialog.close());
+		cartDialog.addEventListener("click", (event) => { if (event.target === cartDialog) cartDialog.close(); });
+		document.querySelector("#checkout-button").addEventListener("click", () => {
+			if (cart.size) showToast("Your bag is ready! Ask a grown-up to help with checkout.");
+		});
+		document.querySelector("#bundle-link").addEventListener("click", () => {
+			["fox-pack", "pencil-pals", "lunch-buddy"].forEach((id) => cart.set(id, (cart.get(id) || 0) + 1));
+			renderCart();
+			showToast("School-day set added to your bag!");
+		});
+		initializeMascots();
+		renderProducts();
+		renderCart();
+	</script>
+</body>
+</html>
